@@ -20,7 +20,7 @@ function Signup() {
         ev.preventDefault();
         const signupData = { name, email, password };
         if (password === confirmPassword) {
-            axios.post('http://localhost:3000/signup', signupData).then(({ data }) => {
+            axios.post('https://foodi-restaurant.onrender.com/signup', signupData).then(({ data }) => {
                 toast.success('Successfully registered');
                 setName('');
                 setEmail('');

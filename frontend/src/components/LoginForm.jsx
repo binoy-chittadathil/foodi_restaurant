@@ -18,7 +18,7 @@ function LoginForm() {
         ev.preventDefault();
         const loginData = { email, password };
         try{
-            const {data}=await axios.post('http://localhost:3000/login', loginData);
+            const {data}=await axios.post('https://foodi-restaurant.onrender.com/login', loginData);
             setUser(data);
             alert('login successfull');
             setPassword('');

@@ -12,7 +12,7 @@ function UserButton() {
   //handle logout
   async function handleLogout() {
     try {
-      await axios.post('http://localhost:3000/logout');
+      await axios.post('https://foodi-restaurant.onrender.com/logout');
       setUser('');
       // Redirect to signup page after successful logout
       navigate('/signup');

@@ -24,10 +24,7 @@ conn.on('error', () => {
 //mongodb connection end
 
 app.use(express.json()); //for parsing data
-app.use(cors({
-    credentials:true,
-    origin:'http://localhost:5173'
-}));
+app.use(cors());
 app.use(cookieParser()) //for parsing cookies
 
 //user registration 
