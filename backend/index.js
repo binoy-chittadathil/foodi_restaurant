@@ -24,7 +24,10 @@ conn.on('error', () => {
 //mongodb connection end
 
 app.use(express.json()); //for parsing data
-app.use(cors());
+app.use(cors({
+    credentials:true,
+    origin:['http://localhost:5173','https://foodiiii.netlify.app']
+}));
 app.use(cookieParser()) //for parsing cookies
 
 //user registration 
