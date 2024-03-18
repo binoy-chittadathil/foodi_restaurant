@@ -10,10 +10,10 @@ function Menu() {
 
   // call all menus from backend
   useEffect(()=>{
-    axios.get('/menu.json').then(({data})=>{
+    axios.get('/menus').then(({data})=>{
       setMenu(data);
       setFilteredMenu(data);
-    }).catch(err=>console.log('error loading data',err))
+    }).catch(err=>console.error('some error occured to find data',err))
   },[]);
   //function to handle menu by category
   function handleMenu(category){

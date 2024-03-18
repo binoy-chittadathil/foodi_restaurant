@@ -10,7 +10,7 @@ function UserContextProvider({children}) {
 
   useEffect(()=>{
     if(!user){
-      axios.get('https://foodi-restaurant.onrender.com/profile').then(({data})=>{
+      axios.get('/user/profile').then(({data})=>{
         setUser(data);
         Setready(true);
       }).catch(err=>{

@@ -12,9 +12,11 @@ function SpecialCorousel() {
     const [popularDishes,setPopularDishes]=useState([]);
 
     useEffect(()=>{
-      axios.get('/menu.json').then(({data})=>{
+      axios.get('/menus').then(({data})=>{
         const filtered=data.filter(item=>item.category==='popular')
         setPopularDishes(filtered);
+      }).catch(err=>{
+        console.error('some error occured to find data',err);
       })
     },[]);
 

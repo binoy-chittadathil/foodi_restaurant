@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { MdDashboard } from "react-icons/md";
 import axios from 'axios';
 import { UserContext } from './context/UserContextProvider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function UserButton() {
   const { setUser } = useContext(UserContext);
@@ -12,7 +13,7 @@ function UserButton() {
   //handle logout
   async function handleLogout() {
     try {
-      await axios.post('https://foodi-restaurant.onrender.com/logout');
+      await axios.post('/user/logout');
       setUser('');
       // Redirect to signup page after successful logout
       navigate('/signup');
@@ -41,6 +42,7 @@ function UserButton() {
             {/* Sidebar content here */}
             <li><a><CgProfile /> Profile</a></li>
             <li onClick={handleLogout}><a><RiLogoutCircleLine /> Logout</a></li>
+            <li><Link to={'/dashboard'}><MdDashboard /> Dashboard</Link></li>
           </ul>
         </div>
       </div>

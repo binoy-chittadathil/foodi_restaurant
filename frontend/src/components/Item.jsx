@@ -1,6 +1,50 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from './context/UserContextProvider';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2'
+import { CartContext } from './context/CartContextProvider';
 
 function Item({item}) {
+  const {user}=useContext(UserContext);
+  const {setCartData}=useContext(CartContext)
+  const [ok,setOk]=useState(false)
+  const navigate=useNavigate()
+
+  //function for handle cart
+  async function handleAddToCart(){
+    if(!user){
+      navigate('/signup')
+    }else{
+      await axios.post('/cart',item).then(async ()=>{
+
+        //alert item added successfully
+        await Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Item added successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setOk(true)
+      }).catch(err=>{
+        Swal.fire({
+          title: "Product already exist in the cart!",
+          icon: "warning",
+          showCancelButton: false,
+        })
+        console.error(err);
+      });
+    }
+  };
+
+  //when item added to the cart the cartData state will change
+  useEffect(()=>{
+    axios.get('/cart').then(({ data }) => {
+     setCartData(data);
+   });
+ },[ok])
+
   return (
                 <div className='hover:border shadow-xl p-6 flex flex-col rounded-3xl'>
                   <div className='flex items-center justify-center'>
@@ -13,7 +57,7 @@ function Item({item}) {
                   {/* price and add to cart option */}
                   <div className='flex w-full items-center justify-between mt-auto'>
                     <p className='text-xl font-bold'><span className='text-[#FF6868]'>$</span> <span>{item.price}</span></p>
-                    <button className='btn bg-green text-white'>Add to Cart</button>
+                    <button onClick={handleAddToCart} className='btn bg-green text-white'>Add to Cart</button>
                   </div>
                   </div>
   )
